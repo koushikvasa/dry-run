@@ -1,26 +1,160 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg: #f8f6f1;
+  --surface: #ffffff;
+  --surface2: #f3f0ea;
+  --border: #e4dfd4;
+  --border2: #ccc7bb;
+  --navy: #1e3a5f;
+  --navy2: #16304f;
+  --navy3: #0f2140;
+  --text: #1a1916;
+  --text2: #6b6660;
+  --text3: #9e9890;
+  --orange: #e8530a;
+  --orange2: #cf4a09;
+  --green: #16a34a;
+  --green-bg: #f0fdf4;
+  --green-border: #bbf7d0;
+  --amber: #d97706;
+  --amber-bg: #fffbeb;
+  --amber-border: #fde68a;
+  --red: #dc2626;
+  --red-bg: #fef2f2;
+  --red-border: #fecaca;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface2: var(--surface2);
+  --color-border: var(--border);
+  --color-border2: var(--border2);
+  --color-navy: var(--navy);
+  --color-navy2: var(--navy2);
+  --color-navy3: var(--navy3);
+  --color-text: var(--text);
+  --color-text2: var(--text2);
+  --color-text3: var(--text3);
+  --color-orange: var(--orange);
+  --color-orange2: var(--orange2);
+  --color-green: var(--green);
+  --color-green-bg: var(--green-bg);
+  --color-green-border: var(--green-border);
+  --color-amber: var(--amber);
+  --color-amber-bg: var(--amber-bg);
+  --color-amber-border: var(--amber-border);
+  --color-red: var(--red);
+  --color-red-bg: var(--red-bg);
+  --color-red-border: var(--red-border);
+  --font-display: var(--font-bricolage);
+  --font-mono: var(--font-jetbrains);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+@keyframes wave {
+  0%, 100% { transform: scaleY(0.2); }
+  50% { transform: scaleY(1); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-bricolage), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
+
+* {
+  box-sizing: border-box;
+}
+
+/* ── Responsive layout classes ── */
+
+.page-content {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 16px 60px;
+}
+@media (min-width: 640px) {
+  .page-content { padding: 0 24px 60px; }
+}
+
+/* Setup page: 1-col on mobile, 2-col on desktop */
+.layout-setup {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+  padding-top: 24px;
+  align-items: start;
+}
+@media (min-width: 768px) {
+  .layout-setup { grid-template-columns: 1fr 1fr; gap: 32px; padding-top: 36px; }
+}
+
+/* Session page: 1-col on mobile, main+sidebar on desktop */
+.layout-session {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  padding-top: 24px;
+  align-items: start;
+}
+@media (min-width: 900px) {
+  .layout-session { grid-template-columns: 1fr 320px; }
+}
+
+/* Debrief top row */
+.layout-debrief-top {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  padding-top: 28px;
+  margin-bottom: 24px;
+}
+@media (min-width: 600px) {
+  .layout-debrief-top { grid-template-columns: 1fr auto; gap: 20px; align-items: start; }
+}
+
+/* Debrief 2×2 card grid */
+.layout-debrief-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+  margin-bottom: 16px;
+}
+@media (min-width: 640px) {
+  .layout-debrief-grid { grid-template-columns: 1fr 1fr; }
+}
+
+/* Action buttons row */
+.layout-buttons {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+@media (min-width: 480px) {
+  .layout-buttons { grid-template-columns: 1fr 1fr; }
+}
+
+/* Topbar nav — hidden on smallest screens */
+.topbar-nav { display: none; }
+@media (min-width: 640px) { .topbar-nav { display: flex; gap: 2px; } }
+
+/* Topbar tagline — hidden on smallest screens */
+.topbar-tagline { display: none; }
+@media (min-width: 480px) { .topbar-tagline { display: inline; } }
